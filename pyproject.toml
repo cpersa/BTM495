@@ -14,7 +14,10 @@ authors = [
   { name = "charleain", email = "183850672+charleain@users.noreply.github.com" },
 ]
 
-dependencies = []
+dependencies = [
+  "fastapi"
+]
 
 [tool.hatch.version]
 path = "src/renova/__about__.py"
+
