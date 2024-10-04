@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "renova"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "charleain", email = "183850672+charleain@users.noreply.github.com" },
+]
+
+dependencies = []
+
+[tool.hatch.version]
+path = "src/renova/__about__.py"
