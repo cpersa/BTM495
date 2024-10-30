@@ -1,8 +1,20 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+
+from renova.db import init_db
 from renova.routers import admin
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    print("asdf")
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.include_router(admin.router)
 
 

@@ -15,9 +15,10 @@ authors = [
 ]
 
 dependencies = [
-  "fastapi"
+  "fastapi",
+  "sqlmodel",
+  "psycopg2-binary"
 ]
 
 [tool.hatch.version]
 path = "src/renova/__about__.py"
-
