@@ -6,7 +6,9 @@ from sqlmodel import Field, Relationship, SQLModel
 
 class InventoryReceiptItem(SQLModel, table=True):
     id: Annotated[int, Field(primary_key=True)]
-    receipt: "InventoryReceipt" = Relationship(back_populates="items") # workaround https://github.com/fastapi/sqlmodel/issues/229
+    receipt: "InventoryReceipt" = Relationship(
+        back_populates="items"
+    )  # workaround https://github.com/fastapi/sqlmodel/issues/229
     name: str
     count: int
     price: int
@@ -18,4 +20,19 @@ class InventoryReceipt(SQLModel, table=True):
     date: datetime
     total_cost: int
     store_name: str
-    items: Annotated[list[InventoryReceiptItem], Relationship(back_populates="receipt")] # workaround https://github.com/fastapi/sqlmodel/issues/229
+    items: Annotated[
+        list[InventoryReceiptItem], Relationship(back_populates="receipt")
+    ]  # workaround https://github.com/fastapi/sqlmodel/issues/229
+
+
+class ExpenseReport(SQLModel, table=True):
+    id: Annotated[int, Field(primary_key=True)]
+    date: datetime
+    itemName: str
+    itemCount: int
+    supplierName: str
+
+class Destination(SQLModel, table=True):
+    destinationName: str
+    storageType: str
+    availableSpace: str
