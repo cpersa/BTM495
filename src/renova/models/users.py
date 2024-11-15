@@ -5,8 +5,7 @@ from typing import TYPE_CHECKING, Annotated, Optional
 from sqlmodel import Field, Relationship, SQLModel
 
 if TYPE_CHECKING:
-    from renova.models.appointments import Appointment, Schedule
-    from renova.models.patient_files import EmergencyContact
+    from renova.models import Appointment, EmergencyContact, Schedule
 
 
 class User(SQLModel):
@@ -33,6 +32,10 @@ class Therapist(User, table=True):
     void_cheque: int
     status_of_work: StatusOfWork
     schedules: list["Schedule"] = Relationship(back_populates="therapist")
+
+    @property
+    def appointments(self):
+        return [s.appointment for s in self.schedules if s.appointment is not None]
 
 
 class Owner(User, table=True):
