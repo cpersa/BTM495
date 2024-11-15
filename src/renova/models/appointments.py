@@ -1,9 +1,11 @@
-import enum
 from datetime import datetime
 from enum import Enum
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, SQLModel, Relationship
+
+if TYPE_CHECKING:
+    from renova.models.users import Therapist, Client
 
 
 class AppointmentStatus(str, Enum):
@@ -11,20 +13,19 @@ class AppointmentStatus(str, Enum):
     canceled = "CANCELLED"
 
 
-class Schedule(SQLModel, table=True):
-    id: Annotated[int, Field(primary_key=True)]
-    start_date: datetime
-    end_date: datetime
-    start_time: datetime
-    end_time: datetime
-    availability: bool
-
-
 class Appointment(SQLModel, table=True):
-    start_date: datetime
-    end_date: datetime
-    start_time: datetime
-    end_time: datetime
-    therapist_name: str
-    client_name: str
+    id: Annotated[int | None, Field(primary_key=True)] = None
+    client_id: Annotated[int | None, Field(foreign_key="client.id")] = None
+    client: "Client" = Relationship(back_populates="appointments")
+    schedule_id: Annotated[int | None, Field(foreign_key="schedule.id")] = None
+    schedule: "Schedule" = Relationship(back_populates="appointment")
     appointment_status: AppointmentStatus
+
+
+class Schedule(SQLModel, table=True):
+    id: Annotated[int | None, Field(primary_key=True)] = None
+    therapist_id: Annotated[int | None, Field(foreign_key="therapist.id")] = None
+    therapist: "Therapist" = Relationship(back_populates="schedules")
+    start_datetime: datetime
+    end_datetime: datetime
+    appointment: Appointment | None = Relationship(back_populates="schedule")

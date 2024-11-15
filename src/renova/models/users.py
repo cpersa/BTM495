@@ -1,15 +1,19 @@
-from datetime import datetime
+from datetime import date
 from enum import Enum
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated, Optional
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
+
+if TYPE_CHECKING:
+    from renova.models.appointments import Appointment, Schedule
+    from renova.models.patient_files import EmergencyContact
 
 
 class User(SQLModel):
-    id: Annotated[int, Field(primary_key=True)]
+    id: Annotated[int | None, Field(default=None, primary_key=True)] = None
     first_name: str
     last_name: str
-    date_of_birth: datetime
+    date_of_birth: date
     gender: str
     pronouns: str
     email_address: str
@@ -23,11 +27,12 @@ class StatusOfWork(str, Enum):
 
 
 class Therapist(User, table=True):
-    _license_number: str
-    hiring_date: datetime
+    license_number: str
+    hiring_date: date
     years_of_experience: int
-    _void_cheque: int
+    void_cheque: int
     status_of_work: StatusOfWork
+    schedules: list["Schedule"] = Relationship(back_populates="therapist")
 
 
 class Owner(User, table=True):
@@ -35,5 +40,8 @@ class Owner(User, table=True):
 
 
 class Client(User, table=True):
-    emergency_contact_name: str
-    emergency_contact_phone: int
+    emergency_contact_id: Annotated[
+        int | None, Field(foreign_key="emergencycontact.id")
+    ] = None
+    emergency_contact: Optional["EmergencyContact"] = Relationship()
+    appointments: list["Appointment"] = Relationship(back_populates="client")
