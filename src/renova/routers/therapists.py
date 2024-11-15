@@ -1,6 +1,6 @@
 from typing import Annotated, Sequence
 
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import AfterValidator
 from sqlmodel import Session, select
 from sqlalchemy.exc import IntegrityError
