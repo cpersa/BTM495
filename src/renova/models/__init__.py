@@ -11,7 +11,7 @@ from .patient_files import (
 )
 from .receipts import InventoryReceipt, InventoryReceiptItem
 from .specializations import Specialization
-from .users import Client, Owner, Therapist
+from .users import Client, Owner, StatusOfWork, Therapist
 
 __all__ = [
     "InventoryReceipt",
@@ -31,4 +31,5 @@ __all__ = [
     "PatientFileAllergyLink",
     "PatientFileMedicationLink",
     "Specialization",
+    "StatusOfWork",
 ]

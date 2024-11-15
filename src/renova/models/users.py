@@ -3,6 +3,7 @@ from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
 
 from sqlmodel import Field, Relationship, SQLModel
+from pydantic import EmailStr
 
 if TYPE_CHECKING:
     from renova.models import Appointment, EmergencyContact, Schedule
@@ -15,7 +16,7 @@ class User(SQLModel):
     date_of_birth: date
     gender: str
     pronouns: str
-    email_address: str
+    email_address: Annotated[EmailStr, Field(unique=True)]
     phone_number: str
     address: str
 

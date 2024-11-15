@@ -17,7 +17,9 @@ authors = [
 dependencies = [
   "fastapi",
   "sqlmodel",
-  "psycopg2-binary"
+  "psycopg2-binary",
+  "httpx",
+  "pydantic[email]",
 ]
 
 [tool.hatch.version]

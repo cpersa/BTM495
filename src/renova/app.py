@@ -5,17 +5,18 @@ from fastapi.responses import HTMLResponse
 
 from renova.db import init_db
 from renova.routers import admin
+from renova.routers import therapists
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
-    print("asdf")
     yield
 
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(admin.router)
+app.include_router(admin.router, prefix="/admin")
+app.include_router(therapists.router)
 
 
 @app.get("/")
