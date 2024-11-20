@@ -7,7 +7,7 @@ from jinja2 import Environment, PackageLoader
 from renova.app import therapists
 from renova.db import init_db
 
-templates = Jinja2Templates(env=Environment(loader=PackageLoader("renova")))
+templates = Jinja2Templates(env=Environment(loader=PackageLoader("renova.app")))
 
 
 @asynccontextmanager
