@@ -1,10 +1,13 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from jinja2 import Environment, PackageLoader
 
+from renova.app import therapists
 from renova.db import init_db
-from renova.routers import admin, therapists
-from renova.templates import templates
+
+templates = Jinja2Templates(env=Environment(loader=PackageLoader("renova")))
 
 
 @asynccontextmanager
@@ -14,7 +17,6 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(admin.router, prefix="/admin")
 app.include_router(therapists.router)
 
 

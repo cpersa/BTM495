@@ -1,6 +1,6 @@
 import pytest
 from sqlmodel import SQLModel, Session, create_engine
-from renova.app import app
+from renova.app.index import app
 from renova.db import get_session
 
 import tempfile
