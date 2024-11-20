@@ -9,4 +9,4 @@ RUN pip-compile && pip install --no-cache-dir --upgrade -r requirements.txt
 FROM base
 COPY . .
 RUN pip install --no-cache-dir --upgrade --no-dependencies --editable .
-CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "--reload", "renova.app:app"]
+CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "--reload", "renova.app.index:app"]

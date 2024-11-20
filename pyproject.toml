@@ -17,10 +17,11 @@ authors = [
 dependencies = [
   "fastapi",
   "sqlmodel",
-  "psycopg2-binary",
   "httpx",
   "pydantic[email]",
   "jinja2",
+  "pyjwt",
+  "argon2-cffi",
 ]
 
 [tool.hatch.version]
