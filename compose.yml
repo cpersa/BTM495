@@ -13,6 +13,8 @@ services:
           target: /usr/local/src/renova/src
           ignore: 
             - __pycache__/
+        - action: rebuild
+          path: ./pyproject.toml
 
 volumes:
   data:

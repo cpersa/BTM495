@@ -45,9 +45,10 @@ def post_therapist_schedules(
     schedule: Annotated[Schedule, AfterValidator(Schedule.model_validate)],
     session: Annotated[Session, Depends(get_session)],
 ) -> Schedule:
-    schedule.therapist = session.exec(
-        select(Therapist).where(Therapist.id == therapist_id)
-    ).one()
+    if schedule.therapist_id != therapist_id:
+        # create a new object with the correct therapist_id
+        schedule.id = None
+        schedule.therapist_id = therapist_id
     session.add(schedule)
     session.commit()
     session.refresh(schedule)
@@ -62,6 +63,9 @@ def get_therapist_schedules(
         select(Therapist).where(Therapist.id == therapist_id)
     ).one()
     return therapist.schedules
+
+
+@router.post("/therapist/{therapist_id}/")
 
 
 @router.get("/therapist/{therapist_id}/appointments")

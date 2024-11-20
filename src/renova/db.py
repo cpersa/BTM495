@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 import os
 from importlib import import_module
 
@@ -7,6 +8,7 @@ DB_URL = os.getenv("DB_URL", "sqlite:////var/lib/renova/renova.db")
 ENGINE = create_engine(DB_URL, echo=os.getenv("DEBUG", False))
 
 
+@contextmanager
 def get_session():
     with Session(ENGINE) as session:
         yield session

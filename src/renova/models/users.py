@@ -2,11 +2,11 @@ from datetime import date
 from enum import Enum
 from typing import TYPE_CHECKING, Annotated, Optional
 
-from sqlmodel import Field, Relationship, SQLModel
 from pydantic import EmailStr
+from sqlmodel import Field, Relationship, SQLModel
 
 if TYPE_CHECKING:
-    from renova.models import Appointment, EmergencyContact, Schedule
+    from renova.models import Appointment, EmergencyContact, PatientFile, Schedule
 
 
 class User(SQLModel):
@@ -33,6 +33,9 @@ class Therapist(User, table=True):
     void_cheque: int
     status_of_work: StatusOfWork
     schedules: list["Schedule"] = Relationship(back_populates="therapist")
+    patient_files: list["PatientFile"] = Relationship(
+        back_populates="primary_therapist"
+    )
 
     @property
     def appointments(self):

@@ -69,4 +69,4 @@ class PatientFile(SQLModel, table=True):
     client_id: Annotated[int | None, Field(foreign_key="client.id")] = None
     client: Client = Relationship()
     primary_therapist_id: Annotated[int | None, Field(foreign_key="therapist.id")] = None
-    primary_therapist: Therapist = Relationship()
+    primary_therapist: Therapist = Relationship(back_populates="patient_files")
