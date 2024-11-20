@@ -15,6 +15,8 @@ services:
             - __pycache__/
         - action: rebuild
           path: ./pyproject.toml
+    env_file:
+      - .env
 
 volumes:
   data:
