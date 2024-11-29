@@ -1,0 +1,3 @@
+https://renova.net.zjc.dev {
+	reverse_proxy http://main:8080
+}

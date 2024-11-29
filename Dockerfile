@@ -1,5 +1,5 @@
 FROM python:3.13-alpine AS base
-EXPOSE 8000
+EXPOSE 8080
 WORKDIR /usr/local/src/renova
 RUN apk add --no-cache --update nodejs npm &&\
     npm install tailwindcss &&\
@@ -13,4 +13,4 @@ COPY tailwind.config.js tailwind.config.js
 RUN ls ./ && npx tailwindcss -i src/renova/main/styles.css -o static/styles.css
 
 FROM base AS main
-CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "--reload", "renova.main:app"]
+CMD ["uvicorn", "--host=0.0.0.0", "--port=8080", "--reload", "renova.main:app"]
