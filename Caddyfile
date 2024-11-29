@@ -1,3 +1,9 @@
+{
+	log {
+		format console
+	}
+}
 https://renova.net.zjc.dev {
+	log
 	reverse_proxy http://main:8080
 }

@@ -1,11 +1,12 @@
 services:
   caddy:
-    image: caddy/caddy
+    image: caddy:latest
     ports:
       - 80:80
       - 443:443
     volumes:
       - caddy:/data
+      - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
   main:
     build:
       target: main
