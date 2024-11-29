@@ -1,0 +1,39 @@
+{% extends "layouts/form.html" %}
+{% from "components/form_input.html" import input, textarea, tel %}
+
+{% macro redirect_param() %}
+{% if redirect is not none %}
+hx-vals="{\"redirect\": \"{{ redirect }}\"}"
+{% endif %}
+{% endmacro %}
+
+{% block header %}
+Already have an account? <a class="underline text-blue-600" href="/login">Sign In Here!</a>
+{% endblock %}
+{% block form %}
+<form class="flex flex-col gap-2" autocomplete="on" hx-post hx-target="body" {{ redirect_param() }}>
+    <div class="w-full flex gap-3">
+        {{ input("first_name", "first_name", "text", "first name", "John") }}
+        {{ input("last_name", "last_name", "text", "last name", "Doe") }}
+    </div>
+    <div class="w-full flex gap-2 flex-nowrap">
+        <span class="flex-none">{{ input("date_of_birth", "date_of_birth", "date", "date of birth", "2000-01-01")
+            }}</span>
+        <span class="flex-1">{{ input("gender", "gender", "text", "gender", "female") }}</span>
+        <span class="flex-1">{{ input("pronouns", "pronouns", "text", "pronouns", "she/her") }}</span>
+    </div>
+    <div>
+        {{ textarea("address", "address", "address", "1235 AV BEAUREGARD\nMONTREAL QC H1T 1M7") }}
+    </div>
+    <div class="w-full flex gap-3">
+        {{ input("email_address", "email_address", "email", "email address", "jdoe@example.com") }}
+        {{ tel("phone_number", "phone_number", "phone number", "(514) 222-2222")}}
+    </div>
+    <div class="w-fill flex gap-3">
+        {{ input("password", "password", "password", "password", "password") }}
+    </div>
+    <div class="mt-6 w-fill flex justify-center">
+        <button type="submit" class="rounded bg-blue-700 text-blue-50 p-2">submit</button>
+    </div>
+</form>
+{% endblock %}

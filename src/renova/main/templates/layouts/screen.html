@@ -1,0 +1,19 @@
+{% extends "layouts/base.html" %}
+{% set title = "Create an account" %}
+{% block content %}
+<div class="h-dvh w-dvw flex flex-col justify-stretch">
+    <header class="flex-none p-4">
+        {% block header %}
+        <span class="flex justify-between items-center">
+            <span class="text-3xl font-extrabold text-red-500">RENOVA</span>
+            {% if authenticated %}
+            <button hx-post="/logout" class="rounded-xl bg-white text-blue-300 uppercase px-4">Logout</button>
+            {% endif %}
+        </span>
+        {% endblock %}
+    </header>
+    <main class="flex-1 max-w-[960px] w-full mx-auto p-4 overflow-hidden">
+        {% block main %}{% endblock %}
+    </main>
+</div>
+{% endblock %}

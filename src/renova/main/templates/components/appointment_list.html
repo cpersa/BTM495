@@ -1,0 +1,28 @@
+{% macro item(appointment) %}
+<li
+    class="flex flex-col justify-stretch rounded-3xl bg-white w-48 h-32 text-md text-blue-500 p-3 transition-colors has-[button:active]:border-blue-500 has-[button:hover]:border-blue-300 border-[3px] border-white">
+    <div class="w-full flex-grow text-center uppercase flex justify-center items-center">
+        <span>
+            {{ appointment.schedule_block.start_datetime.strftime("%B %d, %Y") }}<br>
+            {{ appointment.schedule_block.therapist.full_name }}
+        </span>
+    </div>
+    <div class="w-full flex-none text-center">
+        {% if appointment.appointment_status.value == "CONFIRMED" %}
+        <span class="flex-none rounded-xl p-2 bg-green-50 text-green-500 uppercase text-sm m-[2px]">confirmed</span>
+        {% else %}
+        <button class="flex-none rounded-xl p-2 bg-blue-50 text-blue-500 uppercase text-sm m-[2px]"
+            hx-delete="/home/appointments/{{ appointment.schedule_block.id }}"
+            hx-target="#appointment_list">cancel</button>
+        {% endif %}
+    </div>
+</li>
+
+<li></li>
+{% endmacro %}
+<ul id="appointment_list"
+    class="m-2 p-2 w-full h-full flex flex-row flex-wrap gap-6 place-items-center place-content-center">
+    {% for appointment in appointments %}
+    {{ item(appointment) }}
+    {% endfor %}
+</ul>

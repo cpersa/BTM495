@@ -1,0 +1,17 @@
+{% extends "layouts/screen.html" %}
+{% set title = "Renova Dashboard" %}
+{% block main %}
+<div class="h-full w-full flex flex-col gap-6">
+    <div class="w-full text-left text-6xl text-blue-500 uppercase my-2">find a therapist</div>
+    <div class="w-full h-[2em] text-lg">
+        <label for="search" class="absolute text-blue-200 px-2 align-middle">Search: </label>
+        <input id="search" type="search" name="search"
+            placeholder="{{ client.patient_file.primary_therapist.full_name if client.patient_file else 'John Doe' }}"
+            hx-get="/search_therapists" hx-trigger="input changed delay:500ms, search" hx-target="#search_results"
+            class="pl-20 pr-2 w-full rounded-lg align-middle transition-colors">
+    </div>
+    <div id="search_results" class="flex-grow">
+        {% include "components/therapist_list.html" %}
+    </div>
+</div>
+{% endblock %}

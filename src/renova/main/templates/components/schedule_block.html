@@ -1,0 +1,16 @@
+{% if schedule_block is none %}
+<div class="rounded-xl border-[3px] border-dashed text-center align-middle transform hover:scale-110"
+    hx-post="/schedule" hx-target="this" hx-swap="outerHTML" hx-vals="js:{weekday: {{ weekday }}, hour: {{ hour }}}">
+</div>
+{% elif schedule_block.appointment is none %}
+<div class=" rounded-xl border-[3px] border-blue-500 text-center align-middle transform hover:scale-110"
+    hx-delete="/schedule/{{ schedule_block.id }}" hx-target="this" hx-swap="outerHTML"
+    hx-vals="js:{weekday: {{ weekday }}, hour: {{ hour }}}">
+</div>
+{% elif schedule_block.appointment.appointment_status.value == "CONFIRMED" %}
+<div class="rounded-xl border-[3px] border-green-300 bg-green-300 text-center align-middle transform hover:scale-110"></div>
+{% else %}
+<div class="rounded-xl border-[3px] border-blue-500 bg-blue-500 text-center align-middle transform hover:scale-110"
+    hx-put="/schedule/{{ schedule_block.id }}/confirm" hx-target="this" hx-swap="outerHTML" hx-vals="js:{weekday: {{ weekday }}, hour: {{ hour }}}">
+</div>
+{% endif %}

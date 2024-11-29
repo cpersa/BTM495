@@ -1,0 +1,20 @@
+{% extends "layouts/screen.html" %}
+{% set title = "Create an account" %}
+{% block header %}
+<span class="flex justify-between items-center">
+    <span class="text-3xl font-extrabold text-red-500">RENOVA</span>
+    <span class="justify-self-end">{% block message %}{% endblock %}</span>
+</span>
+{% endblock %}
+{% block main %}
+<div class="h-full flex items-center uppercase">
+    <div class="h-fit flex-none w-[8em] text-center text-blue-500 text-6xl hidden lg:block">
+        Your health on your time
+    </div>
+    <div class="flex-grow flex">
+        <div id="form-container" class="mx-auto">
+            {% block form %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

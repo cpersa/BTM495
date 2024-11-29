@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ title or "Renova" }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://unpkg.com/htmx.org@2.0.3"
+        integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx-ext-response-targets@2.0.0/response-targets.js"></script>
+</head>
+
+<body class="bg-blue-50" hx-boost hx-headers="js:{'X-CSRF-Token': document.csrftoken}" hx-ext="response-targets">
+    {% block content %}{% endblock %}
+    <script hx-disable>
+        (() => {
+            const buffer = new Uint8Array(32);
+            crypto.getRandomValues(buffer);
+            document.csrftoken = btoa(String.fromCodePoint(...buffer));
+            document.cookie = `csrftoken=${document.csrftoken};max-age=3600;samesite=strict;path=/`;
+        })()
+    </script>
+</body>
+
+</html>

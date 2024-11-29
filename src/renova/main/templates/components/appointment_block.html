@@ -1,0 +1,14 @@
+{% if schedule_block is none or (schedule_block.appointment and schedule_block.appointment.client != ctx.client)%}
+<div class="rounded-xl border-[3px] border-dashed text-center align-middle transform hover:scale-110">
+</div>
+{% elif schedule_block.appointment is none %}
+<div class=" rounded-xl border-[3px] border-blue-500 text-center align-middle transform hover:scale-110"
+    hx-put="/appointments/{{ schedule_block.id }}" hx-target="this" hx-swap="outerHTML"
+    hx-vals="js:{weekday: {{ weekday }}, hour: {{ hour }}}">
+</div>
+{% else %}
+<div class="rounded-xl border-[3px] border-blue-500 bg-blue-500 text-center align-middle transform hover:scale-110"
+    hx-delete="/appointments/{{ schedule_block.id }}" hx-target="this" hx-swap="outerHTML"
+    hx-vals="js:{weekday: {{ weekday }}, hour: {{ hour }}}">
+</div>
+{% endif %}

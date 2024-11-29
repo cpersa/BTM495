@@ -1,4 +1,6 @@
-from .appointments import Appointment, AppointmentStatus, Schedule
+from .clients import Client
+from .therapists import StatusOfWork, Therapist
+from .appointments import Appointment, AppointmentStatus, ScheduleBlock
 from .patient_files import (
     Allergy,
     EmergencyContact,
@@ -11,17 +13,16 @@ from .patient_files import (
 )
 from .receipts import InventoryReceipt, InventoryReceiptItem
 from .specializations import Specialization
-from .users import Client, Owner, StatusOfWork, Therapist
+from .products import InventoryProduct
 
 __all__ = [
     "InventoryReceipt",
     "InventoryReceiptItem",
     "Client",
-    "Owner",
     "Therapist",
     "Appointment",
     "AppointmentStatus",
-    "Schedule",
+    "ScheduleBlock",
     "Allergy",
     "EmergencyContact",
     "MedicalChart",
@@ -32,4 +33,5 @@ __all__ = [
     "PatientFileMedicationLink",
     "Specialization",
     "StatusOfWork",
+    "InventoryProduct",
 ]

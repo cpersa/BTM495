@@ -1,0 +1,15 @@
+{% extends "layouts/form.html" %}
+{% from "components/form_input.html" import input%}
+{% set title = "Renova Login" %}
+{% block message %}
+<span>Don't have an account? <a class="underline text-blue-600" href="/signup">Sign Up Here!</a></span>
+{% endblock %}
+{% block form %}
+<form class="p-4 w-fit mx-auto border-dashed border-2 rounded flex flex-col gap-2" hx-post hx-target="body" autocomplete="on">
+    {{ input("email", "email", "email", "email address") }}
+    {{ input("password", "password", "password", "password") }}
+    <div class="w-64 p-1 flex justify-center">
+        <button class="p-1 rounded bg-blue-700 hover:bg-blue-500 text-white" type="submit">login</button>
+    </div>
+</form>
+{% endblock %}

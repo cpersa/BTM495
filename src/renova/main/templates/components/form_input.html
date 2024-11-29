@@ -1,0 +1,22 @@
+{% macro input(id, name, type, label, placeholder) %}
+<div class="w-full">
+    <label for="{{ id }}" class="block text-xs px-1">{{ label }}:</label>
+    <input id="{{ id }}" name="{{ name }}" type="{{ type }}" required
+        class="h-7 w-full block rounded px-1 bg-blue-200 text-center align-middle" placeholder="{{ placeholder }}">
+</div>
+{% endmacro %}
+{% macro textarea(id, name, label, placeholder) %}
+<div class="w-full">
+    <label for="{{ id }}" class="block text-xs px-1">{{ label }}:</label>
+    <textarea id="{{ id }}" name="{{ name }}" type="{{ type }}" required
+        class="min-h-12 h-12 w-full block rounded px-1 bg-blue-200 text-left align-middle"
+        placeholder="{{ placeholder }}"></textarea>
+</div>
+{% endmacro %}
+{% macro tel(id, name, label, placeholder) %}
+<div class="w-full">
+    <label for="{{ id }}" class="block text-xs px-1">{{ label }}:</label>
+    <input id="{{ id }}" name="{{ name }}" type="tel" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" required
+        class="h-7 w-full block rounded px-1 bg-blue-200 text-center align-middle" placeholder="{{ placeholder }}">
+</div>
+{% endmacro %}

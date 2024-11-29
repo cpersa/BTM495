@@ -20,8 +20,9 @@ dependencies = [
   "httpx",
   "pydantic[email]",
   "jinja2",
-  "pyjwt",
+  "pyjwt[crypto]",
   "argon2-cffi",
+  "python-multipart",
 ]
 
 [tool.hatch.version]

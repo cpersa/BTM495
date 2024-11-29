@@ -1,0 +1,25 @@
+{% extends "layouts/screen.html" %}
+{% set title = "Renova Dashboard" %}
+{% block main %}
+<div class="h-full w-full flex flex-col">
+    <div class="w-full text-left text-6xl text-blue-500 uppercase my-2">
+        Welcome, {{ therapist.full_name }}
+    </div>
+    <div class="w-full flex justify-between mb-4">
+        <div class="w-full text-left text-xl text-blue-500 uppercase my-2">
+            Week of {{ date.strftime("%B %d, %Y") }}:
+        </div>
+        <div class="flex items-center gap-2">
+            <button
+                class="inline w-[32px] h-[32px] bg-white rounded-lg text-center align-middle leading-[32px] border text-blue-500 hover:border-blue-500 transition-colors">
+                &lt;
+            </button>
+            <button
+                class="inline w-[32px] h-[32px] bg-white rounded-lg text-center align-middle leading-[32px] border text-blue-500 hover:border-blue-500 transition-colors">
+                &gt;
+            </button>
+        </div>
+    </div>
+    <div id="schedule-container" class="w-full flex-grow">{% include "components/schedule.html" %}</div>
+</div>
+{% endblock %}

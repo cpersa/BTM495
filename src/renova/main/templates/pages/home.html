@@ -1,0 +1,16 @@
+{% extends "layouts/screen.html" %}
+{% set title = "Renova Dashboard" %}
+{% block main %}
+<div class="h-full w-full flex flex-col">
+    <div class="w-full text-left text-6xl text-blue-500 uppercase my-2">Welcome, {{ user.full_name }}</div>
+    {% if not appointments %}
+    <div class="w-full text-left text-xl text-blue-500 uppercase my-2">You don't have any appointments.</div>
+    {% else %}
+    <div class="w-full text-left text-xl text-blue-500 uppercase my-2">Your appointments:</div>
+    <div class="w-full flex-grow">
+        {% include "components/appointment_list.html" %}
+    </div>
+    {% endif %}
+    <div class="w-full text-center my-4"><button class="rounded-lg bg-blue-500 text-white p-2" hx-get="/booking" hx-target="body" hx-push-url="true">Book Now</button></div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layouts/form.html" %}
+{% set title = "Renova Signup"%}
+
+{% macro redirect_param() %}
+    {% if redirect is not none %}
+        hx-vals="{\"redirect\": \"{{ redirect }}\"}"
+    {% endif %}
+{% endmacro %}
+
+{% block message %}
+Already have an account? <a class="underline text-blue-600" href="/login">Sign In Here!</a>
+{% endblock %}
+{% block form %}
+I am a
+<button class="uppercase rounded bg-blue-200 px-1" hx-get="/signup/client" hx-push-url="true"
+    {{ redirect_param() }} hx-select="#form-container > form" hx-target="#form-container"
+    hx-swap="innerHTML">client</button>
+<button class="uppercase rounded bg-blue-200 px-1" hx-get="/signup/therapist" hx-push-url="true"
+    {{ redirect_param() }} hx-select="#form-container > form" hx-target="#form-container"
+    hx-swap="innerHTML">therapist</button>
+{% endblock %}

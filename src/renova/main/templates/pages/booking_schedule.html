@@ -1,0 +1,26 @@
+{% extends "layouts/screen.html" %}
+{% set title = "Renova Booking Schedule" %}
+{% block main %}
+<div class="h-full w-full flex flex-col">
+    <div class="w-full text-left text-6xl text-blue-500 uppercase my-2">
+        {{ therapist.full_name }}&lsquo;s Schedule 
+    </div>
+    <div class="w-full flex justify-between mb-4">
+        <div class="w-full text-left text-xl text-blue-500 uppercase my-2">
+            Week of {{ date.strftime("%B %d, %Y") }}:
+        </div>
+        <div class="flex items-center gap-2">
+            <button
+                class="inline w-[32px] h-[32px] bg-white rounded-lg text-center align-middle leading-[32px] border text-blue-500 hover:border-blue-500 transition-colors">
+                &lt;
+            </button>
+            <button
+                class="inline w-[32px] h-[32px] bg-white rounded-lg text-center align-middle leading-[32px] border text-blue-500 hover:border-blue-500 transition-colors">
+                &gt;
+            </button>
+        </div>
+    </div>
+    <div id="schedule-container" class="w-full flex-grow">{% include "components/appointments.html" %}</div>
+    <div class="flex-none mt-6 flex justify-center"><button class="p-3 rounded-xl bg-white text-blue-300" hx-get="/home" hx-target="body" hx-push-url>done</button></div>
+</div>
+{% endblock %}

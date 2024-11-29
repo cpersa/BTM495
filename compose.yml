@@ -1,7 +1,7 @@
-version: '3.9'
 services:
-  api:
-    build: .
+  main:
+    build:
+      target: main
     ports:
       - 8000:8000
     volumes:
@@ -14,6 +14,12 @@ services:
           ignore: 
             - __pycache__/
         - action: rebuild
+          path: ./src/renova/main/templates
+        - action: rebuild
+          path: ./src/renova/main/styles.css
+        - action: rebuild
+          path: ./tailwind.config.js
+        - action: rebuild
           path: ./compose.yml
         - action: rebuild
           path: ./Dockerfile
@@ -21,6 +27,5 @@ services:
           path: ./pyproject.toml
     env_file:
       - .env
-
 volumes:
   data:
